@@ -1,39 +1,55 @@
 import { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
+import logo from "../../public/assets/splash-group.svg";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import { setModeColor, setTheme } from "../redux/pokemon/pokemonSlice";
 
 const Home = () => {
-  const [modeColor, setModeColor] = useState("primeBlue");
-  const [isTheme, setIsTheme] = useState(
-    () => localStorage.getItem("theme") || "theme-blue"
-  );
+  const { modeColor, theme } = useAppSelector((s) => s.pokemon);
+  console.log(modeColor);
 
+  // const [modeColor, setModeColor] = useState("primeBlue");
+  // const [isTheme, setIsTheme] = useState(
+  //   () => localStorage.getItem("theme") || "theme-blue"
+  // );
+
+  const dispatch = useAppDispatch();
   useEffect(() => {
+    const isTheme = localStorage.getItem("theme") || "theme-blue";
     document.documentElement.className = isTheme;
 
     if (isTheme === "theme-blue") {
-      setModeColor("primeBlue");
+      dispatch(setModeColor("primeBlue"));
     } else if (isTheme === "theme-pink") {
-      setModeColor("primePink");
+      dispatch(setModeColor("primePink"));
     } else if (isTheme === "theme-yellow") {
-      setModeColor("primeYellow");
+      dispatch(setModeColor("primeYellow"));
     }
-  }, [isTheme]);
+
+    dispatch(setTheme(isTheme));
+  }, []);
 
   return (
     <>
       <section
         className={`px-5 h-screen flex flex-col justify-center items-center max-w-xl mx-auto blue:bg-blue-400`}
       >
-        <div className="space-y-3">
-          <img
-            className="mx-auto"
-            src="../../public/assets/splash-group.svg"
-            alt=""
-          />
+        <div className="space-y-3 flex flex-col items-center">
+          <a href="/">
+            <img className="mx-auto" src={logo} alt="" />
+          </a>
           <h1 className="text-5xl font-bold text-center">
-            Poké<span className={`text-${modeColor}`}>book</span>
+            Poké
+            <span
+              className={`text-${modeColor} ${console.log(
+                "Inside",
+                modeColor
+              )}`}
+            >
+              book
+            </span>
           </h1>
-          <p>
+          <p className="text-center w-[80%]">
             Largest Pokémon index with information about every Pokemon you can
             think of.
           </p>

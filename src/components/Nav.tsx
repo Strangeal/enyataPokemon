@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ThemeCard from "./ThemeCard";
+import logo from "../../public/assets/splash-group.svg";
 
 type NavProps = {
   inputSearch: string;
@@ -23,21 +24,18 @@ const Nav = ({
   useEffect(() => {
     document.documentElement.className = isTheme;
     localStorage.setItem("theme", isTheme);
-  }, [isTheme]);
+  }, [isTheme, setModeColor]);
 
-  console.log(modeColor);
+  // console.log(modeColor);
 
   return (
     <nav className={`${isTheme}`}>
       <div className="bg-white w-full border-gray-200 max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <div className="flex items-center justify-between w-full">
           <div className="flex relative">
-            <div className="absolute -top-3 -left-2 xs:-top-3 ">
-              <img
-                className="w-[55%]"
-                src="../../public/assets/splash-group.svg"
-              />
-            </div>
+            <a href="/" className="absolute -top-3 -left-2 xs:-top-3 ">
+              <img className="w-[55%]" src={logo} />
+            </a>
             <h3 className="text-xl font-bold text-center ml-28 sm:ml-32 sm:text-2xl">
               Poké<span className="text-primary">book</span>
             </h3>

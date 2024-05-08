@@ -16,6 +16,8 @@ interface PokemonState {
   prevPage: string | null;
   loading: boolean;
   error: string | null;
+  modeColor: string;
+  theme: string;
 }
 
 const initialState: PokemonState = {
@@ -28,6 +30,8 @@ const initialState: PokemonState = {
   prevPage: null,
   loading: false,
   error: null,
+  modeColor: "primeBlue",
+  theme: "theme-blue",
 };
 
 export const getAllpokemons = createAsyncThunk(
@@ -74,7 +78,14 @@ export const getPokemonDetails = createAsyncThunk(
 const pokemonSlice = createSlice({
   name: "pokemons",
   initialState,
-  reducers: {},
+  reducers: {
+    setModeColor: (state, action) => {
+      state.modeColor = action.payload;
+    },
+    setTheme: (state, action) => {
+      state.theme = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(getAllpokemons.pending, (state) => {
@@ -106,5 +117,7 @@ const pokemonSlice = createSlice({
       });
   },
 });
+
+export const { setModeColor, setTheme } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;

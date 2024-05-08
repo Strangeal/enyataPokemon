@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { setModeColor } from "../redux/pokemon/pokemonSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 type PokemonCardProps = {
   name: string;
@@ -6,7 +8,7 @@ type PokemonCardProps = {
   setIsModal: React.Dispatch<React.SetStateAction<boolean>>;
   handleCardClick: (id: number) => void;
   handleSimilarType: (type: string) => void;
-  modeColor: string;
+  // modeColor: string;
 };
 
 const getTypeEmoji = (typeName: string) => {
@@ -40,11 +42,27 @@ const PokemonCard = ({
   setIsModal,
   handleCardClick,
   handleSimilarType,
-  modeColor,
 }: PokemonCardProps) => {
   const types = data.types.map((type: any) => type.type.name);
+  const { modeColor } = useAppSelector((s) => s.pokemon);
+  const [isTheme, setIsTheme] = useState(
+    () => localStorage.getItem("theme") || "theme-blue"
+  );
 
-  console.log(modeColor);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    // const isTheme = localStorage.getItem("theme") || "theme-blue";
+    document.documentElement.className = isTheme;
+
+    if (isTheme === "theme-blue") {
+      dispatch(setModeColor("primeBlue"));
+    } else if (isTheme === "theme-pink") {
+      dispatch(setModeColor("primePink"));
+    } else if (isTheme === "theme-yellow") {
+      dispatch(setModeColor("primeYellow"));
+    }
+  }, [setModeColor]);
 
   return (
     <div className="bg-white shadow-2xl rounded-2xl p-3 h-full border">
