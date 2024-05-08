@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { setModeColor } from "../redux/pokemon/pokemonSlice";
+import { setModeColor, setTheme } from "../redux/pokemon/pokemonSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 type PokemonCardProps = {
@@ -44,17 +44,14 @@ const PokemonCard = ({
   handleSimilarType,
 }: PokemonCardProps) => {
   const types = data.types.map((type: any) => type.type.name);
-  const { modeColor } = useAppSelector((s) => s.pokemon);
-  const [isTheme, setIsTheme] = useState(
-    () => localStorage.getItem("theme") || "theme-blue"
-  );
+  const { modeColor, theme } = useAppSelector((s) => s.pokemon);
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    // const isTheme = localStorage.getItem("theme") || "theme-blue";
-    document.documentElement.className = isTheme;
+  const isTheme = localStorage.getItem("theme") || theme;
+  document.documentElement.className = isTheme;
 
+  useEffect(() => {
     if (isTheme === "theme-blue") {
       dispatch(setModeColor("primeBlue"));
     } else if (isTheme === "theme-pink") {

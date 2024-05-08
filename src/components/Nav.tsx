@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ThemeCard from "./ThemeCard";
 import logo from "../../public/assets/splash-group.svg";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { setModeColor, setTheme } from "../redux/pokemon/pokemonSlice";
 
 type NavProps = {
   inputSearch: string;
@@ -9,27 +11,30 @@ type NavProps = {
   modeColor: string;
 };
 
-const Nav = ({
-  inputSearch,
-  handleSearch,
-  setModeColor,
-  modeColor,
-}: NavProps) => {
+const Nav = ({ inputSearch, handleSearch }: NavProps) => {
+  const { modeColor, theme } = useAppSelector((s) => s.pokemon);
   const [open, setOpen] = useState(false);
-  const [isTheme, setIsTheme] = useState(
-    () => localStorage.getItem("theme") || "theme-blue"
-  );
   const [openTheme, setOpenTheme] = useState(false);
 
-  useEffect(() => {
-    document.documentElement.className = isTheme;
-    localStorage.setItem("theme", isTheme);
-  }, [isTheme, setModeColor]);
+  const dispatch = useAppDispatch();
 
-  // console.log(modeColor);
+  const isTheme = localStorage.getItem("theme") || theme;
+  document.documentElement.className = isTheme;
+
+  useEffect(() => {
+    if (isTheme === "theme-blue") {
+      dispatch(setModeColor("primeBlue"));
+    } else if (isTheme === "theme-pink") {
+      dispatch(setModeColor("primePink"));
+    } else if (isTheme === "theme-yellow") {
+      dispatch(setModeColor("primeYellow"));
+    }
+
+    dispatch(setTheme(isTheme));
+  }, [setModeColor]);
 
   return (
-    <nav className={`${isTheme}`}>
+    <nav className={`${modeColor} ${theme}`}>
       <div className="bg-white w-full border-gray-200 max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <div className="flex items-center justify-between w-full">
           <div className="flex relative">
@@ -135,7 +140,7 @@ const Nav = ({
 
         {openTheme && (
           <ThemeCard
-            setIsTheme={setIsTheme}
+            setTheme={setTheme}
             setOpenTheme={setOpenTheme}
             setModeColor={setModeColor}
           />

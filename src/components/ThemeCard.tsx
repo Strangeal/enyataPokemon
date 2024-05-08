@@ -1,13 +1,14 @@
 import { useRef } from "react";
 import useClickOutside from "./hooks/UseClickOutside";
+import { useAppDispatch } from "../redux/hooks";
 
 type ThemeProps = {
-  setIsTheme: (value: string) => void;
+  setTheme: any;
   setOpenTheme: React.Dispatch<React.SetStateAction<boolean>>;
-  setModeColor: (value: string) => void;
+  setModeColor: any;
 };
 
-const ThemeCard = ({ setIsTheme, setOpenTheme, setModeColor }: ThemeProps) => {
+const ThemeCard = ({ setTheme, setOpenTheme, setModeColor }: ThemeProps) => {
   const options = [
     {
       mode: "theme-blue",
@@ -22,7 +23,7 @@ const ThemeCard = ({ setIsTheme, setOpenTheme, setModeColor }: ThemeProps) => {
       color: "primePink",
     },
   ];
-
+  const dispatch = useAppDispatch();
   const containerRef = useRef(null);
   useClickOutside(containerRef, () => setOpenTheme(false));
 
@@ -38,9 +39,9 @@ const ThemeCard = ({ setIsTheme, setOpenTheme, setModeColor }: ThemeProps) => {
             <button
               key={index}
               onClick={() => {
-                setIsTheme(opt.mode);
+                dispatch(setTheme(opt.mode));
                 setOpenTheme(false);
-                setModeColor(opt.color);
+                dispatch(setModeColor(opt.color));
               }}
               type="button"
               className="border border-gray-400 p-0.5 rounded-full hover:border-gray-600 transform"

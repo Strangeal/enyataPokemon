@@ -25,3 +25,33 @@
 .active {
   @apply bg-white;
 }
+
+
+
+.pokemon-card {
+  transition: transform 0.3s ease-in-out;
+}
+
+.view-more-btn {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.pokemon-card:hover {
+  transform: scale(0.9);
+}
+
+.view-more-btn {
+  opacity: 0;
+}
+
+.pokemon-card:hover .view-more-btn {
+  opacity: 1;
+}
+
+.search-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.search-icon:hover {
+  transform: scale(1.1);
+}

@@ -6,18 +6,12 @@ import { setModeColor, setTheme } from "../redux/pokemon/pokemonSlice";
 
 const Home = () => {
   const { modeColor, theme } = useAppSelector((s) => s.pokemon);
-  console.log(modeColor);
-
-  // const [modeColor, setModeColor] = useState("primeBlue");
-  // const [isTheme, setIsTheme] = useState(
-  //   () => localStorage.getItem("theme") || "theme-blue"
-  // );
 
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    const isTheme = localStorage.getItem("theme") || "theme-blue";
-    document.documentElement.className = isTheme;
+  const isTheme = localStorage.getItem("theme") || theme;
+  document.documentElement.className = isTheme;
 
+  useEffect(() => {
     if (isTheme === "theme-blue") {
       dispatch(setModeColor("primeBlue"));
     } else if (isTheme === "theme-pink") {
@@ -27,7 +21,7 @@ const Home = () => {
     }
 
     dispatch(setTheme(isTheme));
-  }, []);
+  }, [dispatch, isTheme, setModeColor]);
 
   return (
     <>
@@ -40,14 +34,7 @@ const Home = () => {
           </a>
           <h1 className="text-5xl font-bold text-center">
             Poké
-            <span
-              className={`text-${modeColor} ${console.log(
-                "Inside",
-                modeColor
-              )}`}
-            >
-              book
-            </span>
+            <span className={`text-${modeColor}`}>book</span>
           </h1>
           <p className="text-center w-[80%]">
             Largest Pokémon index with information about every Pokemon you can
@@ -58,7 +45,7 @@ const Home = () => {
         <div className="flex flex-col items-center w-full my-20 space-y-5">
           <div className="relative w-full">
             <input
-              className={`p-3 border-${modeColor} border-4 rounded-full w-full outline-none`}
+              className={`border-${modeColor} p-3 border-4 rounded-full w-full outline-none`}
               type="text"
               placeholder="Enter pokemon name"
             />
