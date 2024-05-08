@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    --color-yellow: "#E1A725";
+    --color-blue: "#39BADF";
+    --color-pink: "#E85382";
+  }
+
+  .theme-yellow {
+   --color-yellow: "#E1A725";
+  }
+  .theme-blue {
+    --color-blue: "#39BADF";
+  }
+  .theme-pink {
+    --color-pink: "#E85382";
+  }
+}
+
+
+.active {
+  @apply bg-white;
+}
