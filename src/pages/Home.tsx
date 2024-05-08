@@ -3,7 +3,7 @@ import { IoSearch } from "react-icons/io5";
 
 const Home = () => {
   const [modeColor, setModeColor] = useState("primeBlue");
-  const [isTheme, setIsTheme] = useState(
+  const [isTheme] = useState(
     () => localStorage.getItem("theme") || "theme-blue"
   );
 
