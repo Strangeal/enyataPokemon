@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import Modal from "../components/Modal";
+import Modal from "../../yyy/components/Modal";
 import {
   getAllpokemons,
   getPokemonDetails,
 } from "../redux/pokemon/pokemonSlice";
-import Pagination from "../components/Pagination";
-import PokemonCard from "../components/PokemonCard";
-import Nav from "../components/Nav";
+import Pagination from "../../yyy/components/Pagination";
+import PokemonCard from "../../yyy/components/PokemonCard";
+import Nav from "../../yyy/components/Nav";
 
 const Pokemon = () => {
   const [isModal, setIsModal] = useState(false);
