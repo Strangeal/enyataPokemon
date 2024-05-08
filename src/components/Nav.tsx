@@ -25,6 +25,8 @@ const Nav = ({
     localStorage.setItem("theme", isTheme);
   }, [isTheme]);
 
+  console.log(modeColor);
+
   return (
     <nav className={`${isTheme}`}>
       <div className="bg-white w-full border-gray-200 max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">

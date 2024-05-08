@@ -44,7 +44,7 @@ const PokemonCard = ({
 }: PokemonCardProps) => {
   const types = data.types.map((type: any) => type.type.name);
 
-  // console.log(buttonClass);
+  console.log(modeColor);
 
   return (
     <div className="bg-white shadow-2xl rounded-2xl p-3 h-full border">

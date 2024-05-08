@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import Modal from "../../yyy/components/Modal";
 import {
   getAllpokemons,
   getPokemonDetails,
 } from "../redux/pokemon/pokemonSlice";
-import Pagination from "../../yyy/components/Pagination";
-import PokemonCard from "../../yyy/components/PokemonCard";
-import Nav from "../../yyy/components/Nav";
+import Nav from "../components/Nav";
+import PokemonCard from "../components/PokemonCard";
+import Pagination from "../components/Pagination";
+import Modal from "../components/Modal";
 
 const Pokemon = () => {
   const [isModal, setIsModal] = useState(false);
-  const [isTheme] = useState(
+  const [isTheme, setIsTheme] = useState(
     () => localStorage.getItem("theme") || "theme-blue"
   );
   const [inputSearch, setInputSearch] = useState("");
@@ -90,8 +90,6 @@ const Pokemon = () => {
           )
         )
       : pokemonList;
-
-  console.log(modeColor);
 
   return (
     <>
