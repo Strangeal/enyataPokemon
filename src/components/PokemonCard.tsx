@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import { setModeColor } from "../redux/pokemon/pokemonSlice";
 import { useAppSelector } from "../redux/hooks";
 
@@ -47,9 +47,14 @@ const PokemonCard = ({
 
   const isTheme = localStorage.getItem("theme") || theme;
   document.querySelector("html")?.setAttribute("data-theme", isTheme);
+  const [showBtn, setShowBtn] = useState(false);
 
   return (
-    <div className="bg-white shadow-2xl rounded-2xl p-3 h-full border">
+    <div
+      className="bg-white shadow-2xl rounded-2xl p-3 borders"
+      onMouseEnter={() => setShowBtn(true)}
+      onMouseLeave={() => setShowBtn(false)}
+    >
       <div className="bg-prime_gray rounded-2xl h-36 border flex justify-center">
         <img
           className="size-44 relative -top-16"
@@ -71,6 +76,7 @@ const PokemonCard = ({
           ))}
         </ul>
       </div>
+      {/* {showBtn && ( */}
       <button
         onClick={() => {
           handleCardClick(data.id);
@@ -82,6 +88,7 @@ const PokemonCard = ({
       >
         View Pokemon
       </button>
+      {/* )} */}
     </div>
   );
 };

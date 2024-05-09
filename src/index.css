@@ -8,6 +8,15 @@
 }
 
 
+.pokemon-grid {
+  transition: grid-template-columns 0.3s ease;
+}
+
+.pokemon-grid:hover {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+
 
 .pokemon-card {
   transition: transform 0.3s ease-in-out;

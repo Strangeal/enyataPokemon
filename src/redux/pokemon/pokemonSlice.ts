@@ -16,6 +16,7 @@ interface PokemonState {
   prevPage: string | null;
   loading: boolean;
   error: string | null;
+  activeTab: string;
   theme: string;
 }
 
@@ -29,6 +30,7 @@ const initialState: PokemonState = {
   prevPage: null,
   loading: false,
   error: null,
+  activeTab: "about",
   theme: "bluetheme",
 };
 
@@ -77,6 +79,9 @@ const pokemonSlice = createSlice({
   name: "pokemons",
   initialState,
   reducers: {
+    setActiveTab: (state, action) => {
+      state.activeTab = action.payload;
+    },
     setTheme: (state, action) => {
       state.theme = action.payload;
       localStorage.setItem("theme", action.payload);
@@ -114,6 +119,6 @@ const pokemonSlice = createSlice({
   },
 });
 
-export const { setTheme } = pokemonSlice.actions;
+export const { setActiveTab, setTheme } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;

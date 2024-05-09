@@ -90,7 +90,6 @@ const Pokemon = () => {
               handleCardClick={handleCardClick}
               setIsModal={setIsModal}
               handleSimilarType={handleSimilarType}
-              // modeColor={modeColor}
             />
           ))}
         </div>

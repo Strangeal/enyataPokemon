@@ -1,13 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { IoSearch } from "react-icons/io5";
 import logo from "../../public/assets/splash-group.svg";
-// import { useAppSelector, useAppDispatch } from "../redux/hooks";
-// import { setModeColor, setTheme } from "../redux/pokemon/pokemonSlice";
 import { themeChange } from "theme-change";
 
 const Home = () => {
-  const themeValue = ["bluetheme", "pinktheme", "yellowtheme"];
-
   useEffect(() => {
     themeChange(false);
   }, []);

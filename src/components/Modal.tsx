@@ -4,6 +4,8 @@ import AboutContent from "./AboutContent";
 import StatsContent from "./StatsContent";
 import SimilarContent from "./SimilarContent";
 import useClickOutside from "./hooks/UseClickOutside";
+import { setActiveTab } from "../redux/pokemon/pokemonSlice";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
 type ModalProps = {
   pokemon: any;
   setIsModal: (value: boolean) => void;
@@ -36,12 +38,14 @@ const getTypeEmoji = (typeName: string) => {
 };
 
 const Modal = ({ pokemon, setIsModal, similarPokes }: ModalProps) => {
-  const [activeTab, setActiveTab] = useState("about");
+  // const [activeTab, setActiveTab] = useState("about");
+  // setActiveTab
+  const { activeTab } = useAppSelector((s) => s.pokemon);
   const containerRef = useRef(null);
   useClickOutside(containerRef, () => setIsModal(false));
-
+  const dispatch = useAppDispatch();
   const handleActiveTab = (tab: string) => {
-    setActiveTab(tab);
+    dispatch(setActiveTab(tab));
   };
 
   return (
@@ -100,7 +104,7 @@ const Modal = ({ pokemon, setIsModal, similarPokes }: ModalProps) => {
                 <button
                   type="button"
                   onClick={() => {
-                    handleActiveTab("about");
+                    dispatch(setActiveTab("about"));
                     console.log(activeTab);
                   }}
                   className={`inline-block w-full font-light py-2 px-4 text-gray-900 rounded-full active focus:outline-none ${
@@ -114,7 +118,7 @@ const Modal = ({ pokemon, setIsModal, similarPokes }: ModalProps) => {
                 <button
                   type="button"
                   onClick={() => {
-                    handleActiveTab("stats");
+                    dispatch(setActiveTab("stats"));
                     console.log(activeTab);
                   }}
                   className={`inline-block w-full font-light py-2 px-4 text-gray-900 rounded-full active focus:outline-none ${
@@ -128,7 +132,7 @@ const Modal = ({ pokemon, setIsModal, similarPokes }: ModalProps) => {
                 <button
                   type="button"
                   onClick={() => {
-                    handleActiveTab("similar");
+                    dispatch(setActiveTab("similar"));
                     console.log(activeTab);
                   }}
                   className={`inline-block w-full font-light py-2 px-4 text-gray-900 rounded-full active focus:outline-none ${
