@@ -5,21 +5,22 @@ import { useAppDispatch } from "../redux/hooks";
 type ThemeProps = {
   setTheme: any;
   setOpenTheme: React.Dispatch<React.SetStateAction<boolean>>;
-  setModeColor: any;
 };
 
-const ThemeCard = ({ setTheme, setOpenTheme, setModeColor }: ThemeProps) => {
+const ThemeCard = ({ setTheme, setOpenTheme }: ThemeProps) => {
+  const themeValue = ["primeBlue", "primePink", "primeYellow"];
+
   const options = [
     {
-      mode: "theme-blue",
+      mode: "bluetheme",
       color: "primeBlue",
     },
     {
-      mode: "theme-yellow",
+      mode: "yellowtheme",
       color: "primeYellow",
     },
     {
-      mode: "theme-pink",
+      mode: "pinktheme",
       color: "primePink",
     },
   ];
@@ -38,17 +39,17 @@ const ThemeCard = ({ setTheme, setOpenTheme, setModeColor }: ThemeProps) => {
           {options.map((opt: any, index: number) => (
             <button
               key={index}
+              data-choose-theme
               onClick={() => {
                 dispatch(setTheme(opt.mode));
                 setOpenTheme(false);
-                dispatch(setModeColor(opt.color));
               }}
               type="button"
               className="border border-gray-400 p-0.5 rounded-full hover:border-gray-600 transform"
             >
-              <span
+              <p
                 className={`h-12 w-12 max-w-[80px] bg-${opt.color} block rounded-full `}
-              ></span>
+              ></p>
             </button>
           ))}
         </div>

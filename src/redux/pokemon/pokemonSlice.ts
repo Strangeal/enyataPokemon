@@ -16,7 +16,6 @@ interface PokemonState {
   prevPage: string | null;
   loading: boolean;
   error: string | null;
-  modeColor: string;
   theme: string;
 }
 
@@ -30,8 +29,7 @@ const initialState: PokemonState = {
   prevPage: null,
   loading: false,
   error: null,
-  modeColor: "primeBlue",
-  theme: "theme-blue",
+  theme: "bluetheme",
 };
 
 export const getAllpokemons = createAsyncThunk(
@@ -79,9 +77,6 @@ const pokemonSlice = createSlice({
   name: "pokemons",
   initialState,
   reducers: {
-    setModeColor: (state, action) => {
-      state.modeColor = action.payload;
-    },
     setTheme: (state, action) => {
       state.theme = action.payload;
       localStorage.setItem("theme", action.payload);
@@ -119,6 +114,6 @@ const pokemonSlice = createSlice({
   },
 });
 
-export const { setModeColor, setTheme } = pokemonSlice.actions;
+export const { setTheme } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;

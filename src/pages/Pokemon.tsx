@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import {
   getAllpokemons,
   getPokemonDetails,
-  setModeColor,
 } from "../redux/pokemon/pokemonSlice";
 import Nav from "../components/Nav";
 import PokemonCard from "../components/PokemonCard";
@@ -11,30 +10,11 @@ import Pagination from "../components/Pagination";
 import Modal from "../components/Modal";
 
 const Pokemon = () => {
-  const { modeColor } = useAppSelector((s) => s.pokemon);
   const [isModal, setIsModal] = useState(false);
   const dispatch = useAppDispatch();
-  // const [isTheme, setIsTheme] = useState(
-  //   () => localStorage.getItem("theme") || "theme-blue"
-  // );
   const [inputSearch, setInputSearch] = useState("");
   const [limit, setLimit] = useState(8);
-  // const [modeColor, setModeColor] = useState("primeBlue");
 
-  // useEffect(() => {
-  //   const isTheme = localStorage.getItem("theme") || "theme-blue";
-  //   document.documentElement.className = isTheme;
-
-  //   if (isTheme === "theme-blue") {
-  //     dispatch(setModeColor("primeBlue"));
-  //   } else if (isTheme === "theme-pink") {
-  //     dispatch(setModeColor("primePink"));
-  //   } else if (isTheme === "theme-yellow") {
-  //     dispatch(setModeColor("primeYellow"));
-  //   }
-  // }, [setModeColor]);
-
-  // const dispatch = useAppDispatch();
   const { pokemonList, currentUrl, nextPage, prevPage, pokemon } =
     useAppSelector((s) => s.pokemon);
 
@@ -99,12 +79,7 @@ const Pokemon = () => {
 
   return (
     <>
-      <Nav
-        inputSearch={inputSearch}
-        handleSearch={handleSearch}
-        setModeColor={setModeColor}
-        modeColor={modeColor}
-      />
+      <Nav inputSearch={inputSearch} handleSearch={handleSearch} />
       <section className={`bg-[#F6F6F6] px-8 lg:px-20`}>
         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-16 py-20 xs:mx-3 xs:gap-y-16 xs:gap-x-3">
           {filteredPokemons?.map((p) => (

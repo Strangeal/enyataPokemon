@@ -1,40 +1,29 @@
 import React, { useEffect, useState } from "react";
 import ThemeCard from "./ThemeCard";
 import logo from "../../public/assets/splash-group.svg";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { setModeColor, setTheme } from "../redux/pokemon/pokemonSlice";
+import { useAppSelector } from "../redux/hooks";
+import { setTheme } from "../redux/pokemon/pokemonSlice";
+import { themeChange } from "theme-change";
 
 type NavProps = {
   inputSearch: string;
   handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  setModeColor: React.Dispatch<React.SetStateAction<string>>;
-  modeColor: string;
 };
 
 const Nav = ({ inputSearch, handleSearch }: NavProps) => {
-  const { modeColor, theme } = useAppSelector((s) => s.pokemon);
+  const { theme } = useAppSelector((s) => s.pokemon);
   const [open, setOpen] = useState(false);
   const [openTheme, setOpenTheme] = useState(false);
 
-  const dispatch = useAppDispatch();
-
   const isTheme = localStorage.getItem("theme") || theme;
-  document.documentElement.className = isTheme;
+  document.querySelector("html")?.setAttribute("data-theme", isTheme);
 
   useEffect(() => {
-    if (isTheme === "theme-blue") {
-      dispatch(setModeColor("primeBlue"));
-    } else if (isTheme === "theme-pink") {
-      dispatch(setModeColor("primePink"));
-    } else if (isTheme === "theme-yellow") {
-      dispatch(setModeColor("primeYellow"));
-    }
-
-    dispatch(setTheme(isTheme));
-  }, [setModeColor]);
+    themeChange(false);
+  }, []);
 
   return (
-    <nav className={`${modeColor} ${theme}`}>
+    <nav>
       <div className="bg-white w-full border-gray-200 max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <div className="flex items-center justify-between w-full">
           <div className="flex relative">
@@ -99,9 +88,7 @@ const Nav = ({ inputSearch, handleSearch }: NavProps) => {
               className="border border-gray-400 p-0.5 rounded-full"
               type="button"
             >
-              <span
-                className={`h-7 w-7 bg-${modeColor} block rounded-full`}
-              ></span>
+              <span className={`h-7 w-7 bg-primary block rounded-full`}></span>
             </button>
           </div>
         </div>
@@ -139,11 +126,7 @@ const Nav = ({ inputSearch, handleSearch }: NavProps) => {
         </div>
 
         {openTheme && (
-          <ThemeCard
-            setTheme={setTheme}
-            setOpenTheme={setOpenTheme}
-            setModeColor={setModeColor}
-          />
+          <ThemeCard setTheme={setTheme} setOpenTheme={setOpenTheme} />
         )}
       </div>
     </nav>

@@ -19,6 +19,20 @@ export default {
       },
     },
   },
-  plugins: [],
-  mode: "jit",
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        bluetheme: {
+          primary: "#39BADF",
+        },
+        pinktheme: {
+          primary: "#E85382",
+        },
+        yellowtheme: {
+          primary: "#E1A725",
+        },
+      },
+    ],
+  },
 };
